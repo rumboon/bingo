@@ -3,6 +3,7 @@
   "nodeModulesDir": "auto",
   "imports": {
     "@eslint/js": "npm:@eslint/js@9.39.1",
+    "@std/http": "jsr:@std/http@^1.0.23",
     "@types/node": "npm:@types/node@24.10.1",
     "@types/react": "npm:@types/react@19.2.5",
     "@types/react-dom": "npm:@types/react-dom@19.2.3",
@@ -20,10 +21,13 @@
     "dev": "deno run -A npm:rolldown-vite@7.2.5",
     "build": "deno run -A npm:rolldown-vite@7.2.5 build",
     "lint": "deno run -A npm:eslint@9.39.1 .",
-    "preview": "deno run -A npm:rolldown-vite@7.2.5 preview"
+    "preview": "deno run -A npm:rolldown-vite@7.2.5 preview",
+    "start": "deno run -A main.ts"
   },
   "deploy": {
     "org": "rumboon",
-    "app": "bingo"
+    "app": "bingo",
+    "exclude": ["**/node_modules"],
+    "entrypoint": "main.ts"
   }
 }
