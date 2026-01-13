@@ -1,7 +1,7 @@
-import { defineConfig } from 'npm:rolldown-vite@7.2.5'
-import react from 'npm:@vitejs/plugin-react@5.1.1'
+import { defineConfig } from 'npm:vite@6.3.5'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  esbuild: {
+    jsx: 'automatic',
+  },
 })
