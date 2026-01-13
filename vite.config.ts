@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'npm:rolldown-vite@7.2.5'
+import react from 'npm:@vitejs/plugin-react@5.1.1'
 
 // https://vite.dev/config/
 export default defineConfig({
