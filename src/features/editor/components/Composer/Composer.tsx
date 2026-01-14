@@ -1,4 +1,3 @@
-import { MIN_ENTRIES } from '../../../../shared/utils'
 import styles from './Composer.module.css'
 
 interface ComposerProps {
@@ -8,7 +7,10 @@ interface ComposerProps {
   onCardCountChange: (count: string) => void
   cardsPerPage: string
   onCardsPerPageChange: (count: string) => void
+  gridSize: string
+  onGridSizeChange: (size: string) => void
   entriesCount: number
+  recommendedEntries: number
   canGenerate: boolean
   onGenerate: () => void
 }
@@ -20,7 +22,10 @@ export function Composer({
   onCardCountChange,
   cardsPerPage,
   onCardsPerPageChange,
+  gridSize,
+  onGridSizeChange,
   entriesCount,
+  recommendedEntries,
   canGenerate,
   onGenerate,
 }: ComposerProps) {
@@ -39,15 +44,17 @@ export function Composer({
           rows={14}
         />
         <div className={styles.fieldMeta}>
-          <span>{entriesCount} unique entries</span>
+          <span>
+            {entriesCount} unique entries · Recommended: {recommendedEntries} for {gridSize}x{gridSize}
+          </span>
           <span
             className={`${styles.status} ${
-              entriesCount >= MIN_ENTRIES ? styles.statusReady : styles.statusWarn
+              entriesCount >= recommendedEntries ? styles.statusReady : styles.statusWarn
             }`}
           >
-            {entriesCount >= MIN_ENTRIES
+            {entriesCount >= recommendedEntries
               ? 'Ready to generate'
-              : `Add ${MIN_ENTRIES - entriesCount} more`}
+              : `Add ${recommendedEntries - entriesCount} more`}
           </span>
         </div>
       </div>
@@ -81,6 +88,21 @@ export function Composer({
               onChange={(event) => onCardsPerPageChange(event.target.value)}
             />
           </div>
+        </div>
+        <div className={styles.field}>
+          <label htmlFor="gridSize" className={styles.label}>
+            Grid size
+          </label>
+          <select
+            id="gridSize"
+            className={styles.input}
+            value={gridSize}
+            onChange={(event) => onGridSizeChange(event.target.value)}
+          >
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+          </select>
         </div>
         <button
           className={`${styles.button} ${styles.primary}`}

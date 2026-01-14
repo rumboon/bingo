@@ -3,9 +3,12 @@ import styles from './Hero.module.css'
 interface HeroProps {
   entriesCount: number
   cardsQueued: number
+  gridSize: number
 }
 
-export function Hero({ entriesCount, cardsQueued }: HeroProps) {
+export function Hero({ entriesCount, cardsQueued, gridSize }: HeroProps) {
+  const hasFreeSpace = gridSize % 2 === 1
+
   return (
     <header className={`${styles.hero} screen-only`}>
       <div className={styles.heroText}>
@@ -16,8 +19,8 @@ export function Hero({ entriesCount, cardsQueued }: HeroProps) {
           printable layout with two cards per A4 sheet.
         </p>
         <div className={styles.pillRow}>
-          <span className={styles.pill}>5x5 layout</span>
-          <span className={styles.pill}>Free center space</span>
+          <span className={styles.pill}>{gridSize}x{gridSize} layout</span>
+          <span className={styles.pill}>{hasFreeSpace ? 'Free center space' : 'No free space'}</span>
           <span className={styles.pill}>2 cards per page</span>
         </div>
       </div>

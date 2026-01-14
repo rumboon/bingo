@@ -6,11 +6,19 @@ interface PrintViewProps {
   cards: string[][][]
   entriesCount: number
   cardsPerPage: number
+  gridSize: number
   onBack: () => void
   onShuffle: () => void
 }
 
-export function PrintView({ cards, entriesCount, cardsPerPage, onBack, onShuffle }: PrintViewProps) {
+export function PrintView({
+  cards,
+  entriesCount,
+  cardsPerPage,
+  gridSize,
+  onBack,
+  onShuffle,
+}: PrintViewProps) {
   const sheets = useMemo(() => {
     const groups: string[][][][] = []
     for (let i = 0; i < cards.length; i += cardsPerPage) {
@@ -51,7 +59,7 @@ export function PrintView({ cards, entriesCount, cardsPerPage, onBack, onShuffle
           <p className={styles.eyebrow}>Print view</p>
           <h2>Cards ready for A4</h2>
           <p className={styles.lead}>
-            {cards.length} cards | {entriesCount} entries | {cardsPerPage} per page
+            {cards.length} cards | {entriesCount} entries | {gridSize}x{gridSize} | {cardsPerPage} per page
           </p>
         </div>
         <div className={styles.toolbarActions}>
@@ -89,7 +97,11 @@ export function PrintView({ cards, entriesCount, cardsPerPage, onBack, onShuffle
             }}
           >
             {sheet.map((card, cardIndex) => (
-              <BingoCard key={`card-${sheetIndex}-${cardIndex}`} card={card} />
+              <BingoCard
+                key={`card-${sheetIndex}-${cardIndex}`}
+                card={card}
+                gridSize={gridSize}
+              />
             ))}
           </div>
         ))}

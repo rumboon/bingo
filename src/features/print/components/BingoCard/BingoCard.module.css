@@ -10,8 +10,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-template-rows: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--grid-size, 5), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--grid-size, 5), minmax(0, 1fr));
   gap: 6px;
   width: 100%;
   flex: 1;
