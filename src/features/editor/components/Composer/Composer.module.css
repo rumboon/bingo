@@ -1,0 +1,146 @@
+.composer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+  animation: rise 0.7s ease both;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(31, 26, 23, 0.15);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.field {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid rgba(31, 26, 23, 0.2);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 transparent;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+  min-height: 260px;
+  line-height: 1.4;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(228, 87, 46, 0.6);
+  box-shadow: 0 0 0 3px rgba(228, 87, 46, 0.15);
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(31, 26, 23, 0.2);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 transparent;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(228, 87, 46, 0.6);
+  box-shadow: 0 0 0 3px rgba(228, 87, 46, 0.15);
+}
+
+.fieldMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.status {
+  font-weight: 600;
+}
+
+.statusReady {
+  color: var(--accent-2);
+}
+
+.statusWarn {
+  color: var(--accent);
+}
+
+.controls {
+  display: grid;
+  gap: 1.2rem;
+  align-content: start;
+}
+
+.button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(31, 26, 23, 0.18);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--accent), #f08b2b);
+  color: #fff;
+}
+
+.helper {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .composer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

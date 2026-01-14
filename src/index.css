@@ -50,3 +50,31 @@ img {
   max-width: 100%;
   display: block;
 }
+
+#root {
+  width: 100%;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
