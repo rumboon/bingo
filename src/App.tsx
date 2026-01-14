@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import './App.css'
 
-const FREE_LABEL = 'FREE'
+const FREE_LABEL = '☺'
 const MIN_ENTRIES = 24
 
 const parseEntries = (text: string) =>
