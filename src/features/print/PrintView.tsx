@@ -7,6 +7,7 @@ interface PrintViewProps {
   entriesCount: number
   cardsPerPage: number
   gridSize: number
+  includeFree: boolean
   onBack: () => void
   onShuffle: () => void
 }
@@ -16,6 +17,7 @@ export function PrintView({
   entriesCount,
   cardsPerPage,
   gridSize,
+  includeFree,
   onBack,
   onShuffle,
 }: PrintViewProps) {
@@ -101,6 +103,7 @@ export function PrintView({
                 key={`card-${sheetIndex}-${cardIndex}`}
                 card={card}
                 gridSize={gridSize}
+                includeFree={includeFree}
               />
             ))}
           </div>

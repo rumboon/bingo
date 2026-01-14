@@ -1,11 +1,12 @@
 export const FREE_LABEL = '☺'
 
-export const hasFreeSpace = (gridSize: number) => gridSize % 2 === 1
+export const hasFreeSpace = (gridSize: number, includeFree: boolean) =>
+  includeFree && gridSize % 2 === 1
 
-export const getRecommendedEntries = (gridSize: number) => {
+export const getRecommendedEntries = (gridSize: number, includeFree: boolean) => {
   const safeSize = Number.isFinite(gridSize) ? Math.max(1, Math.floor(gridSize)) : 5
   const totalCells = safeSize * safeSize
-  return totalCells - (hasFreeSpace(safeSize) ? 1 : 0)
+  return totalCells - (hasFreeSpace(safeSize, includeFree) ? 1 : 0)
 }
 
 export const parseEntries = (text: string) =>
@@ -33,15 +34,19 @@ export const chunk = <T>(items: T[], size: number): T[][] => {
   return result
 }
 
-export const buildCard = (entries: string[], gridSize: number): string[][] => {
-  const picks = shuffle(entries).slice(0, getRecommendedEntries(gridSize))
+export const buildCard = (
+  entries: string[],
+  gridSize: number,
+  includeFree: boolean,
+): string[][] => {
+  const picks = shuffle(entries).slice(0, getRecommendedEntries(gridSize, includeFree))
   const cells: string[] = []
   let pickIndex = 0
   const totalCells = gridSize * gridSize
   const centerIndex = Math.floor(totalCells / 2)
 
   for (let i = 0; i < totalCells; i += 1) {
-    if (hasFreeSpace(gridSize) && i === centerIndex) {
+    if (hasFreeSpace(gridSize, includeFree) && i === centerIndex) {
       cells.push(FREE_LABEL)
       continue
     }
@@ -57,4 +62,6 @@ export const generateCards = (
   entries: string[],
   count: number,
   gridSize: number,
-): string[][][] => Array.from({ length: count }, () => buildCard(entries, gridSize))
+  includeFree: boolean,
+): string[][][] =>
+  Array.from({ length: count }, () => buildCard(entries, gridSize, includeFree))

@@ -4,10 +4,11 @@ interface HeroProps {
   entriesCount: number
   cardsQueued: number
   gridSize: number
+  includeFree: boolean
 }
 
-export function Hero({ entriesCount, cardsQueued, gridSize }: HeroProps) {
-  const hasFreeSpace = gridSize % 2 === 1
+export function Hero({ entriesCount, cardsQueued, gridSize, includeFree }: HeroProps) {
+  const hasFreeSpace = includeFree && gridSize % 2 === 1
 
   return (
     <header className={`${styles.hero} screen-only`}>

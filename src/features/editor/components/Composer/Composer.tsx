@@ -9,6 +9,8 @@ interface ComposerProps {
   onCardsPerPageChange: (count: string) => void
   gridSize: string
   onGridSizeChange: (size: string) => void
+  includeFree: boolean
+  onIncludeFreeChange: (value: boolean) => void
   entriesCount: number
   recommendedEntries: number
   canGenerate: boolean
@@ -24,11 +26,16 @@ export function Composer({
   onCardsPerPageChange,
   gridSize,
   onGridSizeChange,
+  includeFree,
+  onIncludeFreeChange,
   entriesCount,
   recommendedEntries,
   canGenerate,
   onGenerate,
 }: ComposerProps) {
+  const gridSizeNumber = Number.parseInt(gridSize, 10)
+  const supportsFree = gridSizeNumber % 2 === 1
+
   return (
     <section className={`${styles.composer} screen-only`}>
       <div className={`${styles.panel} ${styles.field}`}>
@@ -104,6 +111,15 @@ export function Composer({
             <option value="5">5 x 5</option>
           </select>
         </div>
+        <label className={styles.checkboxRow}>
+          <input
+            type="checkbox"
+            checked={supportsFree && includeFree}
+            disabled={!supportsFree}
+            onChange={(event) => onIncludeFreeChange(event.target.checked)}
+          />
+          <span>Include free center space {supportsFree ? '' : '(odd grids only)'}</span>
+        </label>
         <button
           className={`${styles.button} ${styles.primary}`}
           type="button"

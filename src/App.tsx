@@ -14,6 +14,7 @@ function App() {
   const [cardCount, setCardCount] = useState('4')
   const [cardsPerPage, setCardsPerPage] = useState('2')
   const [gridSize, setGridSize] = useState('5')
+  const [includeFree, setIncludeFree] = useState(true)
   const [cards, setCards] = useState<string[][][]>([])
   const [view, setView] = useState<'editor' | 'print'>('editor')
 
@@ -28,7 +29,7 @@ function App() {
   const safePerPage = Math.min(6, Math.max(1, Number.isFinite(requestedPerPage) ? requestedPerPage : 2))
   const requestedGridSize = Number.parseInt(gridSize, 10)
   const safeGridSize = [3, 4, 5].includes(requestedGridSize) ? requestedGridSize : 5
-  const recommendedEntries = getRecommendedEntries(safeGridSize)
+  const recommendedEntries = getRecommendedEntries(safeGridSize, includeFree)
   const canGenerate = entries.length >= recommendedEntries && safeCount > 0
 
   const handleGenerate = () => {
@@ -36,7 +37,7 @@ function App() {
       return
     }
 
-    setCards(generateCards(entries, cardTotal, safeGridSize))
+    setCards(generateCards(entries, cardTotal, safeGridSize, includeFree))
     setView('print')
   }
 
@@ -45,12 +46,17 @@ function App() {
       return
     }
 
-    setCards(generateCards(entries, cardTotal, safeGridSize))
+    setCards(generateCards(entries, cardTotal, safeGridSize, includeFree))
   }
 
   return (
     <div className={styles.app}>
-      <Hero entriesCount={entries.length} cardsQueued={safeCount} gridSize={safeGridSize} />
+      <Hero
+        entriesCount={entries.length}
+        cardsQueued={safeCount}
+        gridSize={safeGridSize}
+        includeFree={includeFree}
+      />
 
       <Composer
         entriesText={entriesText}
@@ -61,6 +67,8 @@ function App() {
         onCardsPerPageChange={setCardsPerPage}
         gridSize={gridSize}
         onGridSizeChange={setGridSize}
+        includeFree={includeFree}
+        onIncludeFreeChange={setIncludeFree}
         entriesCount={entries.length}
         recommendedEntries={recommendedEntries}
         canGenerate={canGenerate}
@@ -73,6 +81,7 @@ function App() {
           entriesCount={entries.length}
           cardsPerPage={safePerPage}
           gridSize={safeGridSize}
+          includeFree={includeFree}
           onBack={() => setView('editor')}
           onShuffle={handleShuffle}
         />

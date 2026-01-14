@@ -3,10 +3,11 @@ import styles from './BingoCard.module.css'
 interface BingoCardProps {
   card: string[][]
   gridSize: number
+  includeFree: boolean
 }
 
-export function BingoCard({ card, gridSize }: BingoCardProps) {
-  const hasFreeSpace = gridSize % 2 === 1
+export function BingoCard({ card, gridSize, includeFree }: BingoCardProps) {
+  const hasFreeSpace = includeFree && gridSize % 2 === 1
   const centerIndex = Math.floor(gridSize / 2)
 
   return (
