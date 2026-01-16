@@ -1,2 +1,9 @@
 export { PrintView } from './PrintView'
-export { BingoCard } from './components/BingoCard'
+export {
+  BingoCard,
+  cardStyleOptions,
+  defaultCardStyle,
+  getCardStyleById,
+  type CardStyleOption,
+  type CardStyleModule,
+} from './components/BingoCard'

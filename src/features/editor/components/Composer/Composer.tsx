@@ -1,3 +1,4 @@
+import type { CardStyleOption } from '../../../print'
 import styles from './Composer.module.css'
 
 interface ComposerProps {
@@ -11,6 +12,9 @@ interface ComposerProps {
   onGridSizeChange: (size: string) => void
   includeFree: boolean
   onIncludeFreeChange: (value: boolean) => void
+  cardStyleId: string
+  onCardStyleChange: (styleId: string) => void
+  cardStyleOptions: CardStyleOption[]
   entriesCount: number
   recommendedEntries: number
   canGenerate: boolean
@@ -28,6 +32,9 @@ export function Composer({
   onGridSizeChange,
   includeFree,
   onIncludeFreeChange,
+  cardStyleId,
+  onCardStyleChange,
+  cardStyleOptions,
   entriesCount,
   recommendedEntries,
   canGenerate,
@@ -109,6 +116,23 @@ export function Composer({
             <option value="3">3 x 3</option>
             <option value="4">4 x 4</option>
             <option value="5">5 x 5</option>
+          </select>
+        </div>
+        <div className={styles.field}>
+          <label htmlFor="cardStyle" className={styles.label}>
+            Card style
+          </label>
+          <select
+            id="cardStyle"
+            className={styles.input}
+            value={cardStyleId}
+            onChange={(event) => onCardStyleChange(event.target.value)}
+          >
+            {cardStyleOptions.map((style) => (
+              <option key={style.id} value={style.id}>
+                {style.name}
+              </option>
+            ))}
           </select>
         </div>
         <label className={styles.checkboxRow}>

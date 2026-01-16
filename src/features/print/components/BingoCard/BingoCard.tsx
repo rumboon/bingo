@@ -1,21 +1,20 @@
-import styles from './BingoCard.module.css'
+import { type CardStyleOption, defaultCardStyle } from './styles'
 
 interface BingoCardProps {
   card: string[][]
   gridSize: number
   includeFree: boolean
+  cardStyle?: CardStyleOption
 }
 
-export function BingoCard({ card, gridSize, includeFree }: BingoCardProps) {
+export function BingoCard({ card, gridSize, includeFree, cardStyle = defaultCardStyle }: BingoCardProps) {
   const hasFreeSpace = includeFree && gridSize % 2 === 1
   const centerIndex = Math.floor(gridSize / 2)
+  const styles = cardStyle.styles
 
   return (
-    <article className={styles.card}>
-      <div
-        className={styles.grid}
-        style={{ ['--grid-size' as string]: gridSize }}
-      >
+    <article className={styles.card} style={{ ['--grid-size' as string]: gridSize }}>
+      <div className={styles.grid}>
         {card.map((row, rowIndex) =>
           row.map((cell, cellIndex) => {
             const isFree = hasFreeSpace && rowIndex === centerIndex && cellIndex === centerIndex

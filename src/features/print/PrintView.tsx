@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { BingoCard } from './components/BingoCard'
+import { BingoCard, type CardStyleOption } from './components/BingoCard'
 import styles from './PrintView.module.css'
 
 interface PrintViewProps {
@@ -8,6 +8,7 @@ interface PrintViewProps {
   cardsPerPage: number
   gridSize: number
   includeFree: boolean
+  cardStyle: CardStyleOption
   onBack: () => void
   onShuffle: () => void
 }
@@ -18,6 +19,7 @@ export function PrintView({
   cardsPerPage,
   gridSize,
   includeFree,
+  cardStyle,
   onBack,
   onShuffle,
 }: PrintViewProps) {
@@ -104,6 +106,7 @@ export function PrintView({
                 card={card}
                 gridSize={gridSize}
                 includeFree={includeFree}
+                cardStyle={cardStyle}
               />
             ))}
           </div>

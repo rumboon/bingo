@@ -1,0 +1,42 @@
+.card {
+  background: #c41e3a;
+  padding: 1rem;
+  display: flex;
+  aspect-ratio: 1;
+  box-shadow: 0 12px 30px var(--shadow);
+  font-size: 0.75rem;
+  height: 100%;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size, 5), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--grid-size, 5), minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  flex: 1;
+}
+
+.cell {
+  padding: 0.4rem 0.35rem;
+  border: 1px solid white;
+  border-radius: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+}
+
+.free {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media print {
+  .card {
+    box-shadow: none;
+  }
+}
